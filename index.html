@@ -1,200 +1,426 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>$LOTTO – The Elite Memecoin</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          gold: {
-            400: '#d4af37',
-            600: '#d4af37',
-            700: '#b8860b',
-          },
-          black: '#000000',
-        },
-        fontFamily: { sans: ['Inter', 'sans-serif'] },
-      },
-    },
-  };
-</script>
-<style>
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background:#111; color:#fff; overflow-x:hidden; }
-  #particles-js { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2; }
-  .section { min-height:100vh; padding-top:6rem; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  .pointer { width:0; height:0; border-left:12px solid transparent; border-right:12px solid transparent; border-bottom:20px solid #d4af37; margin-top:-10px; }
-  .gold-text {
-    background: repeating-linear-gradient(45deg,#d4af37,#d4af37 10px,#b8860b 10px,#b8860b 20px);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    color:transparent;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$LOTTO – Decentralized luck, transparent wins!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f0e17;
+            color: #fffffe;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #ff8906 0%, #e53170 50%, #0f0e17 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-bg {
+            background: radial-gradient(circle at center, #0f0e17 0%, #000000 100%);
+        }
+        
+        .baller-card {
+            transition: all 0.3s ease;
+        }
+        
+        .baller-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(229, 49, 112, 0.3);
+        }
+        
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #ff8906;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .scroll-down {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px #ff8906;
+            }
+            to {
+                box-shadow: 0 0 20px #e53170;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-90 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold gradient-text">$LOTTO</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#about" class="nav-link text-white hover:text-amber-500">About</a>
+                        <a href="#ballers" class="nav-link text-white hover:text-amber-500">Ballers</a>
+                        <a href="#features" class="nav-link text-white hover:text-amber-500">Features</a>
+                        <a href="#community" class="nav-link text-white hover:text-amber-500">Community</a>
+                        <a href="#buy" class="px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-pink-600 text-white font-bold hover:opacity-90 transition">Buy Now</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-95">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-800">About</a>
+                <a href="#ballers" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-800">Ballers</a>
+                <a href="#features" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-800">Features</a>
+                <a href="#community" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-gray-800">Community</a>
+                <a href="#buy" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gradient-to-r from-amber-500 to-pink-600">Buy Now</a>
+            </div>
+        </div>
+    </nav>
 
-<div id="particles-js"></div>
+    <!-- Hero Section -->
+    <section class="hero-bg pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        <span class="gradient-text">$LOTTO</span><br>
+                        <span class="text-white">Decentralized luck,</span><br>
+                        <span class="text-white">transparent wins!</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">
+                        It's Not Just a $LOTTO<br>
+                        <span class="text-2xl font-bold text-amber-400">it's a Movement</span>
+                    </p>
+                    <div class="flex space-x-4 mb-8">
+                        <a href="#" class="text-white hover:text-amber-500 text-2xl"><i class="fab fa-telegram"></i></a>
+                        <a href="https://x.com/JustALotto" class="text-white hover:text-amber-500 text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="https://dexscreener.com/solana/5zf4j2n2rgtuai7unfwep45rqzedw2qncrvtxqaaxusc" class="text-white hover:text-amber-500 text-2xl"><i class="fas fa-chart-line"></i></a>
+                        <a href="#" class="text-white hover:text-amber-500 text-2xl"><i class="fab fa-discord"></i></a>
+                    </div>
+                    <a href="https://opensea.io/collection/lotto-ballers/overview" class="text-amber-400 hover:underline mb-4 block">opensea.io/collection/lotto-ballers/overview</a>
+                    <div class="mt-8">
+                        <a href="#buy" class="px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-pink-600 text-white font-bold text-lg hover:opacity-90 transition mr-4">Buy $LOTTO</a>
+                        <a href="#ballers" class="px-8 py-4 rounded-full border-2 border-amber-500 text-white font-bold text-lg hover:bg-amber-500 hover:bg-opacity-20 transition">View Ballers</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/0770006973d682dd986457878937169c.jpg" alt="$LOTTO" class="rounded-xl shadow-2xl max-w-md w-full glow">
+                </div>
+            </div>
+            <div class="text-center mt-16 scroll-down">
+                <a href="#about" class="text-white text-4xl"><i class="fas fa-chevron-down"></i></a>
+            </div>
+        </div>
+    </section>
 
-<header class="fixed top-0 left-0 w-full bg-black bg-opacity-80 backdrop-blur-sm z-20">
-  <nav class="container mx-auto flex items-center justify-between py-4 px-6">
-    <a href="#" class="text-2xl font-bold text-gold-600">$LOTTO</a>
-    <ul class="flex space-x-6 text-white">
-      <li><a href="#hero" class="nav-link hover:text-gold-400">Home</a></li>
-      <li><a href="#wheel" class="nav-link hover:text-gold-400">Spin</a></li>
-      <li><a href="#merch" class="nav-link hover:text-gold-400">Merch</a></li>
-      <li><a href="#nft" class="nav-link hover:text-gold-400">NFT</a></li>
-      <li><a href="#facts" class="nav-link hover:text-gold-400">Facts</a></li>
-    </ul>
-  </nav>
-</header>
+    <!-- Ballers Gallery -->
+    <section id="ballers" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">The Rise of The <span class="gradient-text">"Ballers"</span></h2>
+            <p class="text-gray-300 text-center max-w-3xl mx-auto mb-12">
+                In the aftermath of an asteroid impact, radioactive debris animated all lottery balls within the California LOTTO building. 
+                These once inanimate balls gained consciousness and grew humanoid characteristics, each with its own personality.
+            </p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-12">
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-14-at-16.05.15_1854bdc0-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-14-at-16.05.22_e58cc6ed-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-14-at-16.05.26_65ea72ee-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-14-at-16.05.04_1a298159-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-14-at-16.05.00_3660b306-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-17-at-11.05.29_581d130f-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-17-at-11.04.39_40659a72-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-14-at-16.05.09_67626265-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+                <div class="baller-card rounded-lg overflow-hidden">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-14-at-16.04.55_086a8004-300x300.jpg" alt="Baller" class="w-full h-auto">
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-gray-300 mb-6"><strong>NFT Designed by @SafemoonYolo</strong></p>
+                <p class="text-gray-300 max-w-3xl mx-auto mb-8">
+                    Their goal? To bring luck back to the world, one shattered crypto jackpot dream at a time. They would roll into Twitter Spaces, 
+                    bouncing off walls and occasionally into the faces of surprised listeners, distributing small fortunes in the form of winning numbers 
+                    whispered into the ears of the weary.
+                </p>
+                <div class="bg-gray-800 p-4 rounded-lg inline-block">
+                    <p class="text-amber-400 font-mono"><strong>Winning Number CA:</strong></p>
+                    <p class="text-white font-mono break-all">bwCs4bAMoExahc8Np2rxufxfrGai2Jb3mwkMqxkpump</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="hero" class="section text-center">
-  <div class="relative w-48 h-48 mb-8">
-    <svg viewBox="0 0 100 100" class="w-full h-full">
-      <path d="M50 5 Q80 5 80 35 Q80 70 50 85 Q20 70 20 35 Q20 5 50 5 Z"
-            fill="#000" stroke="#d4af37" stroke-width="3"/>
-      <circle cx="38" cy="45" r="5" fill="#d4af37"/>
-      <circle cx="62" cy="45" r="5" fill="#d4af37"/>
-    </svg>
-  </div>
-  <h1 class="gold-text text-7xl md:text-9xl font-extrabold tracking-wider mb-6">$LOTTO</h1>
-  <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
-    The elite memecoin. Elegant. Rich. Unpredictable. Spin the wheel, win free tokens, merch, NFTs and more.
-  </p>
-  <a href="#wheel" class="mt-8 inline-block px-8 py-3 bg-gold-600 hover:bg-gold-700 text-black rounded-full font-semibold transition transform hover:scale-105">Spin the Wheel</a>
-</section>
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">About $Lotto</h2>
+                    <p class="text-gray-300 mb-6">
+                        On the surface, $LOTTO may appear as yet another meme coin… But is it though!? NFT's will become your ticket to an assortment of giveaways, 
+                        the most warm hearted community on X, along with a new view on life.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        The community driven coin's focal point, is to uplift, inspire, encourage, and even motivate all Future #LottoBallers!
+                    </p>
+                    <p class="text-gray-300">
+                        $LOTTO brings a unique twist to crypto by reinventing the way you see meme coins and NFT combos.
+                    </p>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://justalotto.com/wp-content/uploads/2024/12/babbf9b09ebebc83f17cbcc906304439-1024x768.jpg" alt="About $LOTTO" class="rounded-xl shadow-2xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="wheel" class="section bg-black bg-opacity-80 py-20">
-  <h2 class="text-5xl font-bold text-gold-600 mb-8">Spin the Fortune Wheel</h2>
-  <div class="relative">
-    <canvas id="wheelCanvas" width="500" height="500" class="rounded-full shadow-2xl"></canvas>
-    <div class="absolute inset-x-0 top-0 flex justify-center"><div class="pointer"></div></div>
-  </div>
-  <button id="spinBtn" class="mt-8 px-6 py-3 bg-gold-600 hover:bg-gold-700 text-black font-semibold rounded-full transition transform hover:scale-105">Spin</button>
-  <div id="result" class="mt-6 text-2xl font-semibold text-white"></div>
-</section>
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">What Makes <span class="gradient-text">$LOTTO</span> Special?</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+                <div class="text-center p-6 bg-gray-800 rounded-xl">
+                    <div class="feature-icon bg-gradient-to-r from-amber-500 to-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <img src="https://justalotto.com/wp-content/uploads/2024/12/Solana_logo.png" alt="Solana" class="w-12 h-12">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Built on Solana</h3>
+                    <p class="text-gray-300">
+                        Enjoy blazing-fast transactions and near-zero fees, making every spin of the $LOTTO wheel as smooth as it is rewarding.
+                    </p>
+                </div>
+                
+                <div class="text-center p-6 bg-gray-800 rounded-xl">
+                    <div class="feature-icon bg-gradient-to-r from-amber-500 to-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <img src="https://justalotto.com/wp-content/uploads/2024/06/icon-img-7.png" alt="Meme Magic" class="w-12 h-12">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Meme Magic, Real Value</h3>
+                    <p class="text-gray-300">
+                        $LOTTO combines viral meme culture with solid tokenomics, ensuring that our community grows in both numbers and value.
+                    </p>
+                </div>
+                
+                <div class="text-center p-6 bg-gray-800 rounded-xl">
+                    <div class="feature-icon bg-gradient-to-r from-amber-500 to-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <img src="https://justalotto.com/wp-content/uploads/2024/08/icon.png" alt="Global Community" class="w-12 h-12">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Global Community</h3>
+                    <p class="text-gray-300">
+                        Join a growing family of crypto enthusiasts, meme lovers, and lucky charm seekers from around the world.
+                    </p>
+                </div>
+                
+                <div class="text-center p-6 bg-gray-800 rounded-xl">
+                    <div class="feature-icon bg-gradient-to-r from-amber-500 to-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <img src="https://justalotto.com/wp-content/uploads/2024/12/Solana_logo.png" alt="NFT Launch" class="w-12 h-12">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">NFT Launch</h3>
+                    <p class="text-gray-300">
+                        Each NFT has a number from 1-69. There will be drawings with MEGA PRIZES multiple times per month!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="merch" class="section py-20 bg-gradient-to-r from-gray-900 via-black to-gray-900">
-  <h2 class="text-5xl font-bold text-gold-600 mb-6">Official Merchandise</h2>
-  <p class="max-w-xl text-center text-gray-300 mb-8">
-    Dress like a $LOTTO elite. Grab exclusive tees, hoodies, caps, and gold‑trimmed Jordans. Limited stock.
-  </p>
-  <a href="https://justalotto.com/merch" target="_blank" class="px-8 py-3 bg-gold-600 hover:bg-gold-700 text-black rounded-full font-semibold transition transform hover:scale-105">Shop Merch</a>
-</section>
+    <!-- Why Join Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Why Become a <span class="gradient-text">#LottoBaller</span>?</h2>
+                <p class="text-gray-300 max-w-3xl mx-auto">
+                    In a sea of meme coins, $LOTTO stands out by offering more than just laughs—it offers real rewards, a thriving community, 
+                    and a vision for long-term growth. Whether you're in it for the memes, the jackpots, or the journey, $LOTTO is your ultimate crypto companion.
+                </p>
+            </div>
+            
+            <div class="flex justify-center">
+                <img src="https://justalotto.com/wp-content/uploads/2024/12/babbf9b09ebebc83f17cbcc906304439-1024x768.jpg" alt="Community" class="rounded-xl shadow-2xl max-w-4xl w-full">
+            </div>
+        </div>
+    </section>
 
-<section id="nft" class="section py-20 bg-black bg-opacity-90">
-  <h2 class="text-5xl font-bold text-gold-600 mb-6">NFT Collection</h2>
-  <p class="max-w-xl text-center text-gray-300 mb-8">
-    Own a piece of the $LOTTO universe. Rare ghost avatars, golden tokens and more await on our NFT marketplace.
-  </p>
-  <a href="https://justalotto.com/nft" target="_blank" class="px-8 py-3 bg-gold-600 hover:bg-gold-700 text-black rounded-full font-semibold transition transform hover:scale-105">Visit NFT Store</a>
-</section>
+    <!-- CTA Section -->
+    <section id="buy" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-500 to-pink-600">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Get Started Today!</h2>
+            <p class="text-white text-xl mb-8">Ready to test your luck? Join us and be part of the $LOTTO adventure.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="https://jup.ag/swap/SOL-bwCs4bAMoExahc8Np2rxufxfrGai2Jb3mwkMqxkpump" class="px-8 py-4 rounded-full bg-white text-black font-bold text-lg hover:bg-gray-100 transition">Buy $LOTTO NOW</a>
+                <a href="https://x.com/JustALotto" class="px-8 py-4 rounded-full border-2 border-white text-white font-bold text-lg hover:bg-white hover:bg-opacity-20 transition">Let's Connect</a>
+            </div>
+        </div>
+    </section>
 
-<section id="facts" class="section py-20 bg-gray-900">
-  <h2 class="text-5xl font-bold text-gold-600 mb-8">Fun Facts & Stats</h2>
-  <ul class="list-disc list-inside text-lg text-gray-300 space-y-3 max-w-2xl">
-    <li>Over $80,000 in crypto giveaways to the community.</li>
-    <li>Launched on November 27, 2024 with a $500k market cap.</li>
-    <li>Token listed on multiple major DEXes and CEXes.</li>
-    <li>More than 3,000 $LOTTO holders worldwide.</li>
-    <li>Community events include daily spin challenges and exclusive airdrops.</li>
-  </ul>
-</section>
+    <!-- Community Section -->
+    <section id="community" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Join Our <span class="gradient-text">Community</span></h2>
+            
+            <div class="flex flex-wrap justify-center gap-6 mb-16">
+                <a href="#" class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-2xl text-white hover:bg-amber-500 transition"><i class="fab fa-telegram"></i></a>
+                <a href="https://x.com/JustALotto" class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-2xl text-white hover:bg-amber-500 transition"><i class="fab fa-twitter"></i></a>
+                <a href="https://dexscreener.com/solana/5zf4j2n2rgtuai7unfwep45rqzedw2qncrvtxqaaxusc" class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-2xl text-white hover:bg-amber-500 transition"><i class="fas fa-chart-line"></i></a>
+                <a href="#" class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-2xl text-white hover:bg-amber-500 transition"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+    </section>
 
-<footer class="bg-black text-center py-4 text-gray-400">
-  <p>© 2025 $LOTTO. All rights reserved.</p>
-</footer>
+    <!-- Disclaimer Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <h3 class="text-xl font-bold mb-6 text-amber-400">Disclaimer</h3>
+            <div class="text-gray-300 space-y-4">
+                <p>
+                    Welcome to Just a $Lotto! The information shared on this site is for informational and educational purposes only. 
+                    It is not intended as financial, investment, or trading advice. Always conduct your own research and consult a qualified 
+                    financial advisor before making any investment decisions. Please note that cryptocurrencies are highly volatile and carry significant risks.
+                </p>
+                
+                <h4 class="font-bold text-white mt-8 mb-4">Safety and Security Guidelines</h4>
+                <p>Your safety and security are our top priorities. Please follow these guidelines to protect yourself and your assets:</p>
+                
+                <ul class="list-disc pl-6 space-y-2">
+                    <li><strong>Protect Your Seed Phrases:</strong> Write your seed phrases on paper with a pen. Do NOT take photos, screenshots, or store them digitally.</li>
+                    <li><strong>Guard Your Private Keys:</strong> Never share your seed phrase or private keys with anyone.</li>
+                    <li><strong>Verify Links Before Connecting:</strong> Only connect your wallet via official websites.</li>
+                    <li><strong>Beware of Scams:</strong> Avoid "airdrop" links; they are often scams. Never send coins to anyone claiming they will "double" them.</li>
+                    <li><strong>Handle Unknown Tokens Carefully:</strong> If you see tokens in your wallet that you didn't purchase, do not interact with them.</li>
+                    <li><strong>Team Communication:</strong> No moderator or team member will ever ask for your seed phrases, passwords, wallet details, or funds via direct message (DM).</li>
+                </ul>
+                
+                <p class="mt-6">
+                    We encourage everyone to stay safe. When in doubt, ask for help — we're here to support you! Thank you for being a part of the $Lotto community. 
+                    Let's make crypto adoption a success, together!
+                </p>
+            </div>
+        </div>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <a href="#" class="text-2xl font-bold gradient-text">$LOTTO</a>
+            </div>
+            <div class="text-gray-300 text-sm">
+                <p>&copy; 2024 $LOTTO. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-<script>
-/* Particles.js background */
-particlesJS('particles-js',{
-  "particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#d4af37"},"shape":{"type":"circle"},"opacity":{"value":0.5},"size":{"value":4,"random":true},"move":{"enable":true,"speed":1.5,"direction":"none","out_mode":"out"}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"repulse":{"distance":80,"duration":0.4},"push":{"particles_nb":4}}},"retina_detect":true});
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
 
-/* GSAP scroll reveal */
-gsap.registerPlugin(ScrollTrigger);
-document.querySelectorAll('.section').forEach(section=>{
-  gsap.from(section,{opacity:0,y:80,duration:1,ease:"power2.out",
-    scrollTrigger:{trigger:section,start:"top 85%"}});
-});
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
 
-/* Navbar link active highlight */
-const navLinks=document.querySelectorAll('.nav-link');
-navLinks.forEach(l=>l.addEventListener('click',()=>{navLinks.forEach(t=>t.classList.remove('text-gold-400'));l.classList.add('text-gold-400');}));
-
-/* Wheel drawing & spin logic */
-const canvas=document.getElementById('wheelCanvas');
-const ctx=canvas.getContext('2d');
-const R=canvas.width/2;
-const rewards=[
-  "Free Lotto Token","Free Lotto Ball","Free Merch Discount","Free NFT Giveaway",
-  "10% Off Merch","$5 Lotto Credit","Exclusive Ghost Avatar","Mystery Prize"
-];
-const sliceAngles = 2*Math.PI/rewards.length;
-const colors=["#2d2d2d","#333333","#404040","#4f4f4f","#5e5e5e","#6d6d6d","#7c7c7c","#8b8b8b"];
-function drawWheel(highlight=-1){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.save(); ctx.translate(R,R);
-  for(let i=0;i<rewards.length;i++){
-    ctx.beginPath();
-    ctx.moveTo(0,0);
-    ctx.arc(0,0,R-5,i*sliceAngles,(i+1)*sliceAngles);
-    ctx.closePath();
-    ctx.fillStyle= i===highlight ? "#d4af37" : colors[i%colors.length];
-    ctx.fill();
-    ctx.save();
-    ctx.rotate(i*sliceAngles+sliceAngles/2);
-    ctx.translate(R*0.65,0);
-    ctx.rotate(Math.PI/2);
-    ctx.fillStyle="#fff";
-    ctx.font="bold 14px sans-serif";
-    ctx.textAlign="center";
-    ctx.fillText(rewards[i],0,0);
-    ctx.restore();
-  }
-  ctx.beginPath();
-  ctx.arc(0,0,R*0.15,0,2*Math.PI);
-  ctx.fillStyle="#000";
-  ctx.fill();
-  ctx.restore();
-}
-drawWheel();
-
-let spinning=false;
-document.getElementById('spinBtn').addEventListener('click',()=>{
-  if(spinning) return;
-  spinning=true;
-  document.getElementById('result').textContent="";
-  const fullSpins=Math.floor(Math.random()*3)+5; //5‑7 spins
-  const randomDeg=Math.random()*360;
-  const targetDeg=fullSpins*360+randomDeg;
-  gsap.to(canvas,{
-    rotation:-targetDeg,
-    duration:fullSpins*1.3,
-    ease:"power2.out",
-    onComplete:()=>{
-      const finalAngle=(randomDeg+90)%360; // pointer at top
-      const idx=Math.floor(finalAngle/(360/rewards.length));
-      const prize=rewards[idx];
-      document.getElementById('result').textContent=`🎉 You won: ${prize}!`;
-      drawWheel(idx);
-      setTimeout(()=>drawWheel(-1),2000);
-      spinning=false;
-    }
-  });
-});
-</script>
+        // Add shadow to navbar on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
 </body>
 </html>
-```
